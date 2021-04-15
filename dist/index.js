@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require('fs');
 
 const _path = require('path');
@@ -12,11 +14,13 @@ const resolvePath = require('resolve-path');
 
 
 module.exports = (root, opts = {}) => {
+  var _opts$index, _opts$defer, _opts$cache;
+
   let config = {
     root: _path.resolve(root),
-    index: opts.index ?? 'index.html',
-    bubbling: opts.defer ?? false,
-    cache: opts.cache ?? false
+    index: (_opts$index = opts.index) !== null && _opts$index !== void 0 ? _opts$index : 'index.html',
+    bubbling: (_opts$defer = opts.defer) !== null && _opts$defer !== void 0 ? _opts$defer : false,
+    cache: (_opts$cache = opts.cache) !== null && _opts$cache !== void 0 ? _opts$cache : false
   };
   return async (ctx, next) => {
     if (ctx.method !== 'HEAD' && ctx.method !== 'GET') return await next();
